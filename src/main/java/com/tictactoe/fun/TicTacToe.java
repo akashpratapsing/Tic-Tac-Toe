@@ -24,7 +24,6 @@ public class TicTacToe extends Application {
     private Label gameOver;
     private boolean isGameOver;
     private MiniMax computer;
-    private Button resetButton;
     private Button computerWin;
     private Button playerWIn;
     private Button draw;
@@ -33,10 +32,6 @@ public class TicTacToe extends Application {
     private int countComputerWins = 0;
     private int countPlayerWins = 0;
     private int drawCount = 0;
-
-    private Label playerLabel;
-    private Label computerLabel;
-    private Label drawLabel;
 
 
     @Override
@@ -66,7 +61,7 @@ public class TicTacToe extends Application {
         gameOver = new Label("");
         gameOver.setStyle("-fx-font-size: 24px;");
 
-        resetButton = new Button();
+        Button resetButton = new Button();
         resetButton.setOnAction(actionEvent -> resetGame());
         resetButton.setPrefSize(100, 40);
         resetButton.setText("Reset Game");
@@ -84,15 +79,15 @@ public class TicTacToe extends Application {
         draw.setPrefSize(50, 50);
         draw.setText("0");
 
-        playerLabel = new Label();
+        Label playerLabel = new Label();
         playerLabel.setText("Player");
         playerLabel.setStyle("-fx-font-size: 15px;");
 
-        computerLabel = new Label();
+        Label computerLabel = new Label();
         computerLabel.setText("Computer");
         computerLabel.setStyle("-fx-font-size: 15px;");
 
-        drawLabel = new Label();
+        Label drawLabel = new Label();
         drawLabel.setText("Ties");
         drawLabel.setStyle("-fx-font-size: 15px;");
 
@@ -101,7 +96,7 @@ public class TicTacToe extends Application {
         gameOverBox.setAlignment(Pos.CENTER);
 
         HBox scoreLabel = new HBox();
-        scoreLabel.getChildren().addAll(computerLabel,playerLabel, drawLabel);
+        scoreLabel.getChildren().addAll(computerLabel, playerLabel, drawLabel);
         scoreLabel.setPadding(new Insets(40,80,10,80));
         scoreLabel.setAlignment(Pos.CENTER);
         scoreLabel.setSpacing(30);
@@ -150,7 +145,7 @@ public class TicTacToe extends Application {
         }
     }
 
-    // Method for Computer to make it's move
+    // Method for Computer to make its move
     private void makeComputerMove() {
         int[] moves = computer.getMoves(getBoardState());
         board[moves[0]][moves[1]].setText(COMPUTER_SYMBOL);

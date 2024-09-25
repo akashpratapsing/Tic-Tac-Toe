@@ -3,9 +3,7 @@ package com.tictactoe.fun;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -14,12 +12,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class TIcTacTOe extends Application {
+public class TicTacToe extends Application {
 
+    // initializing board size and symbols
     private static final int BOARD_SIZE = 3;
     private static final String PLAYER_SYMBOL = "X";
     private static final String COMPUTER_SYMBOL = "O";
 
+    // Creating components of game
     private Button[][] board;
     private Label gameOver;
     private boolean isGameOver;
@@ -29,6 +29,7 @@ public class TIcTacTOe extends Application {
     private Button playerWIn;
     private Button draw;
 
+    // variables for counting wins and ties
     private int countComputerWins = 0;
     private int countPlayerWins = 0;
     private int drawCount = 0;
@@ -42,7 +43,7 @@ public class TIcTacTOe extends Application {
     public void start(Stage stage) throws IOException {
         computer = new MiniMax(PLAYER_SYMBOL, COMPUTER_SYMBOL);
 
-
+        // Using components to design the layout
         GridPane boardGrid = new GridPane();
         boardGrid.setHgap(5);
         boardGrid.setVgap(5);
@@ -69,7 +70,6 @@ public class TIcTacTOe extends Application {
         resetButton.setOnAction(actionEvent -> resetGame());
         resetButton.setPrefSize(100, 40);
         resetButton.setText("Reset Game");
-
 
         computerWin = new Button();
         computerWin.setPrefSize(50, 50);
@@ -118,23 +118,17 @@ public class TIcTacTOe extends Application {
         root.setStyle("-fx-background-color: #0479b0;");
         //root.setAlignment(Pos.TOP_CENTER);
 
-
-
         Scene scene = new Scene(root, 400, 500);
         stage.setTitle("Tic Tac Toe");
         stage.setScene(scene);
-
         stage.show();
-
-
-
     }
 
+    // Method to handle players move
     private void handlePlayerMove(int row, int col) {
         if (isGameOver){
             return;
         }
-
         Button button = board[row][col];
         if (button.getText().isEmpty()){
             button.setText(PLAYER_SYMBOL);
@@ -156,6 +150,7 @@ public class TIcTacTOe extends Application {
         }
     }
 
+    // Method for Computer to make it's move
     private void makeComputerMove() {
         int[] moves = computer.getMoves(getBoardState());
         board[moves[0]][moves[1]].setText(COMPUTER_SYMBOL);
@@ -171,13 +166,18 @@ public class TIcTacTOe extends Application {
         }
     }
 
+    // checks if player wins.
+    // Tip: This is not going to happen
     private boolean isPlayerWin() {
         return computer.isWinningState(getBoardState(), PLAYER_SYMBOL);
     }
+
+    // Checks if computer wins
     private boolean isComputerWin() {
         return computer.isWinningState(getBoardState(), COMPUTER_SYMBOL);
     }
 
+    //Returns the current state of board
     private String[][] getBoardState() {
         String[][] boardState = new String[BOARD_SIZE][BOARD_SIZE];
         for (int i = 0; i < BOARD_SIZE; i++) {
@@ -188,6 +188,7 @@ public class TIcTacTOe extends Application {
         return boardState;
     }
 
+    // Checks if board is full or not
     private boolean isBoardFull() {
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
@@ -199,6 +200,7 @@ public class TIcTacTOe extends Application {
         return true;
     }
 
+    // Clears the text of board
     private void resetGame() {
         isGameOver = false;
         gameOver.setText("");
@@ -209,17 +211,20 @@ public class TIcTacTOe extends Application {
         }
     }
 
+    // It fetches the counts number of time computer won
     private int getCountComputerWins(){
         return countComputerWins;
     }
 
+    // It fetches the counts number of ties
     private int getDrawCount(){
         return drawCount;
     }
+
+    // It fetches the counts number of time player won
     private int getCountPlayerWins(){
         return countPlayerWins;
     }
-
 
     public static void main(String[] args) {
         launch();

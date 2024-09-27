@@ -4,7 +4,6 @@ public class Main {
 
     // The reason for creating this class was to make jar file of this application.
     // This Game only have Hard Mode.
-    // Means YOU CAN'T WIN
     public static void main(String[] args) {
         TicTacToe.main(args);
     }
